@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { signal } from '@angular/core';
+import { signal, effect } from '@angular/core';
 
 
 @Component({
@@ -15,12 +15,17 @@ export class AppComponent {
 
   theme = signal('light');
 
-  ngOnInit() {
-    //this.theme.set('dark');
+  label = this.theme();
 
-    this.theme.update(currentValue => currentValue === 'light'? 'dark' : 'light');
-
-    if (typeof document !== 'undefined')
-      document.body.className = this.theme();
+  constructor() {
+    effect(() => {
+      this.label = this.theme();
+    })
   }
+
+  toggleDarkMode() {
+    this.theme.update(currentValue => currentValue === 'light'? 'dark' : 'light');
+  }
+
+
 }
