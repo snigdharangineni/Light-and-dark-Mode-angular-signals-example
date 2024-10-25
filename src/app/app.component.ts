@@ -16,6 +16,11 @@ export class AppComponent {
   theme = signal('light');
 
   ngOnInit() {
-    document.body.className = this.theme();
+    //this.theme.set('dark');
+
+    this.theme.update(currentValue => currentValue === 'light'? 'dark' : 'light');
+
+    if (typeof document !== 'undefined')
+      document.body.className = this.theme();
   }
 }
