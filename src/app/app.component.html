@@ -2,6 +2,21 @@
 <br>
 <button (click) = "toggleDarkMode()">Toggle</button>
 
+<br>
 <label>{{totalPrice()}}</label>
 <br>
-<input type="number" value={{quantity()}} (change) ="changeQuantity($event)">
+<input type="number" value={{quantity()}} (change)="changeQuantity($event)">
+
+<br>
+<div>
+  <input type="text" (input)="changeFilter($event)"/>
+</div>
+<br>
+<table>
+  <tbody>  <tr *ngFor="let product of filteredProducts()">
+    <td>{{product.id}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.price}}</td>
+  </tr></tbody>
+
+</table>
